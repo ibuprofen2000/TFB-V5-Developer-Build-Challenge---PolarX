@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TFB Parking</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     Root container – hidden until openGarage
+     ═══════════════════════════════════════════ -->
+<div id="app" class="hidden" role="dialog" aria-modal="true" aria-label="Parking Garage">
+
+    <!-- ── Header ── -->
+    <header class="hdr">
+        <div class="hdr__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M5 11l1.5-4.5h11L19 11M17.5 16a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m-8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0M18.92 10 17 4H7L5.08 10H3v2h1v7h3v-1h8v1h3v-7h1v-2h-1.08Z"/>
+            </svg>
+        </div>
+        <div class="hdr__info">
+            <h1 id="garageTitle" class="hdr__title">Garage</h1>
+            <span id="garageSubtitle" class="hdr__sub">Parked Vehicles</span>
+        </div>
+        <button id="btnClose" class="btn-close" aria-label="Close garage" title="Close (Esc)">&#x2715;</button>
+    </header>
+
+    <!-- ── Tab bar ── -->
+    <nav class="tabs" role="tablist">
+        <button class="tab tab--active" data-tab="parked" role="tab" aria-selected="true">
+            <span class="tab__icon">&#x1F697;</span> My Vehicles
+        </button>
+        <button class="tab" data-tab="park" role="tab" aria-selected="false">
+            <span class="tab__icon">&#x2795;</span> Park Vehicle
+        </button>
+    </nav>
+
+    <!-- ── Panel: parked vehicles ── -->
+    <section id="panelParked" class="panel" role="tabpanel">
+
+        <div id="emptyState" class="empty hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M5 11l1.5-4.5h11L19 11M17.5 16a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m-8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0M18.92 10 17 4H7L5.08 10H3v2h1v7h3v-1h8v1h3v-7h1v-2h-1.08Z"/>
+            </svg>
+            <p>No vehicles parked here yet.</p>
+            <p class="empty__hint">Switch to the <strong>Park Vehicle</strong> tab to store your current ride.</p>
+        </div>
+
+        <ul id="vehicleList" class="vehicle-list" aria-label="Parked vehicles"></ul>
+
+    </section>
+
+    <!-- ── Panel: park current vehicle ── -->
+    <section id="panelPark" class="panel hidden" role="tabpanel">
+        <div class="park-card">
+            <div class="park-card__icon">&#x1F697;</div>
+            <h2 class="park-card__title">Park Your Current Vehicle</h2>
+            <p class="park-card__body">
+                Get into the vehicle you want to store, then click the button below.
+                Your vehicle's condition, modifications, and appearance will all be saved.
+            </p>
+            <button id="btnPark" class="btn btn--primary btn--lg">
+                Park Vehicle
+            </button>
+            <p class="park-card__note">
+                Your vehicle will be removed from the world and safely stored in this garage.
+            </p>
+        </div>
+    </section>
+
+    <!-- ── Status bar ── -->
+    <footer class="statusbar">
+        <span id="slotCount" class="statusbar__slots">0 / 10 slots used</span>
+        <span class="statusbar__hint">Press <kbd>E</kbd> at a garage to open · <kbd>Esc</kbd> to close</span>
+    </footer>
+</div>
+
+<!-- ── Toast notification ── -->
+<div id="toast" class="toast hidden" role="alert" aria-live="assertive"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
